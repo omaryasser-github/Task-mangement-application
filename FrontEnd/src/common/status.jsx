@@ -1,45 +1,24 @@
 import React from 'react';
 
-const statusOptions = [
-  {
-    value: 'inProgress',
-    label: 'In Progress',
-    color: 'bg-yellow-400',
-    icon: <span className="inline-block w-5 h-5 rounded-full bg-yellow-400 border-2 border-white" />,
-  },
-  {
-    value: 'completed',
-    label: 'Completed',
-    color: 'bg-green-400',
-    icon: <span className="inline-block w-5 h-5 rounded-full bg-green-400 border-2 border-white" />,
-  },
-  {
-    value: 'wontDo',
-    label: 
-      "Won't do",
-    color: 'bg-red-400',
-    icon: <span className="inline-block w-5 h-5 rounded-full bg-red-400 border-2 border-white" />,
-  },
-];
-
-export default function Status({ value, onChange, options = statusOptions }) {
+export default function StatusSelector({ options, value, onChange }) {
   return (
-    <div className="flex gap-4 mt-2">
+    <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full">
       {options.map((opt) => (
         <button
           key={opt.value}
           type="button"
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl border-2 transition focus:outline-none ${
-            value === opt.value
-              ? 'border-blue-500 bg-white shadow'
-              : 'border-gray-200 bg-gray-50'
-          }`}
+          className={`flex items-center gap-2 px-4 py-3 rounded-2xl border-2 w-full sm:w-auto transition focus:outline-none text-base sm:text-lg font-medium
+            ${value === opt.value ? 'border-blue-600 bg-white shadow' : 'border-gray-200 bg-white'}
+          `}
           onClick={() => onChange(opt.value)}
+          aria-pressed={value === opt.value}
         >
-          {opt.icon}
-          <span className={`font-medium ${value === opt.value ? '' : 'text-gray-600'}`}>{opt.label}</span>
+          <span className={`inline-block w-7 h-7 rounded-full flex items-center justify-center mr-2`} style={{ backgroundColor: opt.color }}>
+            {opt.icon}
+          </span>
+          <span className={`flex-1 text-left ${value === opt.value ? 'text-gray-900' : 'text-gray-600'}`}>{opt.label}</span>
           {value === opt.value && (
-            <span className="ml-2 text-blue-500 text-lg">&#10003;</span>
+            <span className="ml-2 text-blue-600 text-xl font-bold">&#10003;</span>
           )}
         </button>
       ))}

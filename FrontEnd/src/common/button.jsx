@@ -1,16 +1,21 @@
 import React from 'react';
 
-export default function Button({ children, variant = 'primary', icon, ...props }) {
-  let base = 'flex items-center justify-center px-6 py-2 rounded-full font-medium focus:outline-none transition';
-  let styles = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700',
-    secondary: 'bg-gray-200 text-gray-700 hover:bg-gray-300',
-    danger: 'bg-gray-100 text-red-600 hover:bg-red-200',
+export default function Button({ children, type = 'primary',icon, ...props }) {
+  const base = 'flex items-center justify-center px-6 py-2  rounded-full font-medium focus:outline-none transition';
+  const styles = {
+    primary: 'bg-[#3662E3] text-white hover:bg-blue-500',
+    danger: 'bg-[#97A3B6] text-[#E3E8EF] hover:bg-gray-500'
   };
   return (
-    <button className={`${base} ${styles[variant]}`} {...props}>
-      {icon && <span className="mr-2">{icon}</span>}
-      {children}
+    <button className={`${base} ${styles[type]}`} {...props}>
+       {children}
+      {icon && (
+        <span className="ml-2">
+          { <img src={icon} alt="icon" className="w-5 h-5" /> }
+          
+        </span>
+      )}
+     
     </button>
   );
 } 
