@@ -1,9 +1,10 @@
 import React from "react";
 import logo from "../assets/Logo.svg";
 import Edit_doutone from "../assets/Edit_duotone.svg";
-import Box from "../common/box";
+import Box from "../components/box";
 import MainLayout from "../layouts/mainlayout";
 import SideBoard from "./sideboard";
+import SidebarToggleButton from "../components/SidebarToggleButton";
 
 export default function MainBoard() {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -11,26 +12,7 @@ export default function MainBoard() {
   return (
     <MainLayout>
       {/* Sidebar open button */}
-      <button
-        className="fixed top-6 right-6 z-40 bg-yellow-400 hover:bg-yellow-500 text-white rounded-full p-3 shadow-lg focus:outline-none transition"
-        onClick={() => setSidebarOpen(true)}
-        aria-label="Open sidebar"
-      >
-        <svg
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="feather feather-menu"
-        >
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
-      </button>
+          <SidebarToggleButton onClick={() => setSidebarOpen(true)} />
 
       {/* Overlay */}
       {sidebarOpen && (

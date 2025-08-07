@@ -1,7 +1,5 @@
-import React from 'react';
-
 export default function Button({ children, type = 'primary',icon, ...props }) {
-  const base = 'flex items-center justify-center px-6 py-2  rounded-full font-medium focus:outline-none transition';
+  const base = 'flex items-center justify-center px-6 py-2  rounded-full font-medium focus:outline-none transition cursor-pointer';
   const styles = {
     primary: 'bg-[#3662E3] text-white hover:bg-blue-500',
     danger: 'bg-[#97A3B6] text-[#E3E8EF] hover:bg-gray-500'

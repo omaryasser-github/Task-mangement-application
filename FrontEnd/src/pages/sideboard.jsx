@@ -1,42 +1,20 @@
-import React, { useState } from "react";
-import close_ring_duotone from "../assets/close_ring_duotone-1.svg";
+import { useState } from "react";
+import { statusOptions } from "../constants/statusOptions";
+import { iconOptions } from "../constants/iconOptions";
 import trash from "../assets/Trash.svg";
 import Done_round from "../assets/Done_round.svg";
-import Button from "../common/button";
-import StatusSelector from "../common/status";
-import Inputfield from "../common/Inputfield";
-import IconButton from "../common/icons";
+import close_ring_duotone from "../assets/close_ring_duotone-1.svg";
+import Button from "../components/button";
+import StatusSelector from "../components/status";
+import Inputfield from "../components/Inputfield";
+import Icon from "../components/icons";
 
-const iconOptions = ["🧑🏻‍💻", "💬", "☕", "🏋️‍♂️", "📚", "⏰"];
 
 export default function SideBoard({ isOpen, onClose }) {
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(iconOptions[0]);
   const [status, setStatus] = useState("inProgress");
-
-  // Status options for the selector
-  const statusOptions = [
-    {
-      value: 'inProgress',
-      label: 'In Progress',
-      color: '#F5D565',
-      icon: <span className="inline-block w-5 h-5 rounded-full bg-[#F5D565] border-2 border-white" />,
-    },
-    {
-      value: 'completed',
-      label: 'Completed',
-      color: '#4ECB71',
-      icon: <span className="inline-block w-5 h-5 rounded-full bg-[#4ECB71] border-2 border-white" />,
-    },
-    {
-      value: 'wontDo',
-      label: 
-        "Won't do",
-      color: '#F76659',
-      icon: <span className="inline-block w-5 h-5 rounded-full bg-[#F76659] border-2 border-white" />,
-    },
-  ];
 
   return (
     <div
@@ -83,12 +61,12 @@ export default function SideBoard({ isOpen, onClose }) {
 
         {/* Icons selection */}
         <div>
-          <label className="block text-gray-500 font-medium mb-1 text-sm sm:text-base">
+          < p className="block text-gray-500 font-medium mb-1 text-sm sm:text-base">
             Icon
-          </label>
+          </p>
           <div className="flex gap-2 sm:gap-3 mb-2 flex-wrap">
             {iconOptions.map((icn, idx) => (
-              <IconButton
+              <Icon
                 key={icn}
                 icon={icn}
                 selected={icon === icn}
@@ -103,10 +81,14 @@ export default function SideBoard({ isOpen, onClose }) {
 
         {/* Status selection */}
         <div>
-          <label className="block text-gray-500 font-medium mb-1 text-sm sm:text-base">
+          <span className="block text-gray-500 font-medium mb-1 text-sm sm:text-base">
             Status
-          </label>
-          <StatusSelector options={statusOptions} value={status} onChange={setStatus} />
+          </span>
+          <StatusSelector
+            options={statusOptions}
+            value={status}
+            onChange={setStatus}
+          />
         </div>
 
         {/* Buttons */}

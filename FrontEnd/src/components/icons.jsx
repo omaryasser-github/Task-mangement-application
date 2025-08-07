@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 
-export default function IconButton({
+
+export default React.memo(function Icons({
   icon,
   selected,
   onClick,
@@ -11,9 +12,8 @@ export default function IconButton({
   const background = selected ? selectedBgColor : bgColor;
 
   return (
-    <button
-      type="button"
-      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl border-2 text-lg sm:text-xl transition focus:outline-none"
+    <div
+      className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl border-2 text-lg sm:text-xl transition focus:outline-none cursor-pointer"
       onClick={onClick}
       style={{
         backgroundColor: background,
@@ -22,6 +22,6 @@ export default function IconButton({
       {...props}
     >
       {icon}
-    </button>
+    </div>
   );
-}
+})

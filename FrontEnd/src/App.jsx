@@ -1,4 +1,3 @@
-import React from 'react';
 import MainBoard from './pages/mainboard';
 
 function App() {
