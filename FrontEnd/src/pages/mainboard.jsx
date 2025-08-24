@@ -4,44 +4,65 @@ import Edit_doutone from "../assets/Edit_duotone.svg";
 import Box from "../components/box";
 import MainLayout from "../layouts/mainlayout";
 import SideBoard from "./sideboard";
-import SidebarToggleButton from "../components/SidebarToggleButton";
+import { tasks } from "../constants/tasks";
 
 export default function MainBoard() {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
+  const [selectedTask, setSelectedTask] = React.useState(null);
+
+  const handleTaskClick = (taskData) => {
+    setSelectedTask(taskData);
+    setSidebarOpen(true);
+  };
 
   return (
     <MainLayout>
-      {/* Sidebar open button */}
-          <SidebarToggleButton onClick={() => setSidebarOpen(true)} />
-
-      {/* Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-30 z-30 transition-opacity duration-300"
-          onClick={() => setSidebarOpen(false)}
+          onClick={() => {
+            setSidebarOpen(false);
+            setSelectedTask(null);
+          }}
         />
       )}
 
-      {/* Sidebar */}
-      <SideBoard isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-      <div className="flex items-center mb-4">
-        <img src={logo} alt="logo" className="w-12 mr-4" />
-        <h1 className="text-4xl font-bold m-0 flex items-center gap-2">
-          My Task Board
-          <img src={Edit_doutone} alt="Edit" className="w-5 h-5 mt-1" />
-        </h1>
-      </div>
-      <div className="text-gray-700 text-lg mb-8">Tasks to keep organised</div>
-      <Box state="inProgress" label="Task in Progress" />
-      <Box state="completed" label="Task Completed" />
-      <Box state="wontDo" label="Task Won't Do" />
-      <Box
-        state="toDo"
-        label="Task To Do"
-        description="Work on a Challenge on devChallenges.io, learn TypeScript."
+      <SideBoard
+        isOpen={sidebarOpen}
+        onClose={() => {
+          setSidebarOpen(false);
+          setSelectedTask(null);
+        }}
+        taskData={selectedTask}
       />
-      <Box state="add" label="Add new task" />
+
+      <main className="mt-9">
+        <header className="flex items-center mb-8 gap-2">
+          <img src={logo} alt="logo" className="w-10 mb-8" />
+
+          <div className="flex flex-col gap-2">
+            <h1 className="text-4xl font-Outfit font-normal m-0 flex items-center gap-2">
+              My Task Board
+              <img src={Edit_doutone} alt="Edit" className="w-5 h-5 mt-1" />
+            </h1>
+            <h3 className="text-gray-700 text-lg mt-1">
+              Tasks to keep organised
+            </h3>
+          </div>
+        </header>
+
+        {/* ✅ بدل التكرار، نعمل Map */}
+        {tasks.map((task) => (
+          <Box
+            key={task.id}
+            state={task.state}
+            label={task.label}
+            description={task.description}
+            onClick={handleTaskClick}
+            taskData={task}
+          />
+        ))}
+      </main>
     </MainLayout>
   );
 }

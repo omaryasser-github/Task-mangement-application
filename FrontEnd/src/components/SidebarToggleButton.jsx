@@ -1,4 +1,6 @@
-import {memo} from "react";
+// feature will be add  (Dead code)
+
+/* import {memo} from "react";
 
 const buttonStyle =
   "fixed top-6 right-6 z-40 bg-yellow-400 hover:bg-yellow-500 text-white rounded-full p-3 shadow-lg focus:outline-none transition";
@@ -30,3 +32,4 @@ function SidebarToggleButton({ onClick }) {
 }
 
 export default memo(SidebarToggleButton);
+ */

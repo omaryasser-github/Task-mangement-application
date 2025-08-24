@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { statusOptions } from "../constants/statusOptions";
 import { iconOptions } from "../constants/iconOptions";
 import trash from "../assets/Trash.svg";
@@ -10,11 +10,27 @@ import Inputfield from "../components/Inputfield";
 import Icon from "../components/icons";
 
 
-export default function SideBoard({ isOpen, onClose }) {
+export default function SideBoard({ isOpen, onClose, taskData }) {
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState(iconOptions[0]);
   const [status, setStatus] = useState("inProgress");
+
+  // Update form fields when taskData changes
+  React.useEffect(() => {
+    if (taskData) {
+      setTaskName(taskData.label || "");
+      setDescription(taskData.description || "");
+      setStatus(taskData.state || "inProgress");
+      // You might want to set icon based on taskData as well
+    } else {
+      // Reset form for new task
+      setTaskName("");
+      setDescription("");
+      setIcon(iconOptions[0]);
+      setStatus("inProgress");
+    }
+  }, [taskData]);
 
   return (
     <div
@@ -28,7 +44,7 @@ export default function SideBoard({ isOpen, onClose }) {
         {/* Header */}
         <header className="flex justify-between items-center p-1">
           <h2 className="text-xl sm:text-2xl font-semibold mb-2">
-            Task details
+            {taskData ? "Edit Task" : "Task details"}
           </h2>
           <button
             onClick={onClose}
