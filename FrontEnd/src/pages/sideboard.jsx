@@ -13,7 +13,7 @@ import Icon from "../components/icons";
 export default function SideBoard({ isOpen, onClose, taskData }) {
   const [taskName, setTaskName] = useState("");
   const [description, setDescription] = useState("");
-  const [icon, setIcon] = useState(iconOptions[0]);
+  const [icon, setIcon] = useState(iconOptions[1]);
   const [status, setStatus] = useState("inProgress");
 
   // Update form fields when taskData changes
@@ -21,26 +21,29 @@ export default function SideBoard({ isOpen, onClose, taskData }) {
     if (taskData) {
       setTaskName(taskData.label || "");
       setDescription(taskData.description || "");
+      setIcon(taskData.icon || iconOptions[0]);
       setStatus(taskData.state || "inProgress");
-      // You might want to set icon based on taskData as well
     } else {
       // Reset form for new task
       setTaskName("");
       setDescription("");
       setIcon(iconOptions[0]);
       setStatus("inProgress");
+      // setisSelected(true);
+      
     }
   }, [taskData]);
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-full sm:w-[30rem] md:w-[60rem] lg:w-[100rem] max-w-full sm:max-w-[80vw] md:max-w-[40rem] bg-white shadow-lg z-50 transform transition-transform duration-300 ${
+      className={`fixed rounded-2xl top-2 right-2 bottom-2 h-80% w-full sm:w-[30rem] md:w-[60rem] lg:w-[100rem] max-w-full sm:max-w-[80vw] md:max-w-[40rem] bg-white shadow-lg z-50 transform transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
       style={{ boxShadow: "0 0 20px rgba(0,0,0,0.1)" }}
     >
       {/* sidebar task  */}
       <form className="p-4 sm:p-6 flex flex-col gap-4 h-[calc(100%-80px)] overflow-y-auto">
+
         {/* Header */}
         <header className="flex justify-between items-center p-1">
           <h2 className="text-xl sm:text-2xl font-semibold mb-2">
@@ -109,15 +112,15 @@ export default function SideBoard({ isOpen, onClose, taskData }) {
 
         {/* Buttons */}
         {/* Fixed action buttons at the bottom */}
-        <div className="fixed left-0 right-0 bottom-0 sm:left-auto sm:right-auto sm:bottom-0 sm:w-[30rem] md:w-[30rem] lg:w-[35rem] mx-auto px-4 pb-4 bg-transparent z-50">
+        <div className="fixed left-0 right-0 bottom-0 sm:left-auto sm:bottom-0 sm:w-[30rem] md:w-[30rem] lg:w-[35rem] mx-auto px-4 pb-4 bg-transparent ">
           <div className="flex gap-4 justify-end">
             {/* Delete button */}
-            <Button type="danger" icon={trash}>
+            <Button type="button" variant="danger" icon={trash}>
               Delete
             </Button>
 
             {/* Save button */}
-            <Button type="primary" icon={Done_round}>
+            <Button type="submit" variant="primary" icon={Done_round}>
               Save
             </Button>
           </div>

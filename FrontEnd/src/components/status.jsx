@@ -7,8 +7,8 @@ export default function StatusSelector({ options, value, onChange }) {
       {options.map((opt) => (
         <div
           key={opt.value}
-          type="button"
-          className={`flex items-center gap-2 px-1 py-1 rounded-2xl border-2 transition focus:outline-none text-sm sm:text-base font-medium
+          role="button"
+          className={`flex items-center gap-2 px-1 py-1 rounded-2xl border-2  text-sm sm:text-base font-medium
         ${
           value === opt.value
             ? "border-blue-600 bg-white shadow"
@@ -35,11 +35,15 @@ export default function StatusSelector({ options, value, onChange }) {
 
           {value === opt.value && (
             <span className="mr-3 flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white  ">
-           <img src={Done_round} alt="action" className="w-4 h-4 font-light text-xs" />
+              <img
+                src={Done_round}
+                alt="Selected"
+                className="w-4 h-4 font-light text-xs"
+              />
             </span>
           )}
         </div>
       ))}
     </div>
   );
-}
+} 

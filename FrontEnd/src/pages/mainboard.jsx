@@ -9,10 +9,12 @@ import { tasks } from "../constants/tasks";
 export default function MainBoard() {
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const [selectedTask, setSelectedTask] = React.useState(null);
+   const [isSelected, setisSelected] = React.useState(false);
 
   const handleTaskClick = (taskData) => {
     setSelectedTask(taskData);
     setSidebarOpen(true);
+    setisSelected(!isSelected);
   };
 
   return (
@@ -23,6 +25,7 @@ export default function MainBoard() {
           onClick={() => {
             setSidebarOpen(false);
             setSelectedTask(null);
+            setIsActive(false);
           }}
         />
       )}
@@ -32,6 +35,7 @@ export default function MainBoard() {
         onClose={() => {
           setSidebarOpen(false);
           setSelectedTask(null);
+          setisSelected(false);
         }}
         taskData={selectedTask}
       />
@@ -60,6 +64,7 @@ export default function MainBoard() {
             description={task.description}
             onClick={handleTaskClick}
             taskData={task}
+            isSelected={task.id === selectedTask?.id}
           />
         ))}
       </main>

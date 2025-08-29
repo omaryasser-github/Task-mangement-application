@@ -6,37 +6,34 @@ export default React.memo(function Box({
   description,
   onClick,
   taskData = {},
+  isSelected,
 }) {
   const handleClick = () => {
-    if (onClick) {
-      if (taskData.state === "add") {
-        onClick(null); // Pass null for add new task
-      } else {
-        onClick(taskData);
-      }
-    }
+    if (onClick) onClick(taskData);
   };
 
   return (
     <div
-      className={`flex items-center justify-between rounded-2xl py-4 px-6 my-3 min-h-[60px] shadow-md ${
-        onClick
-          ? "cursor-pointer hover:shadow-lg transition-shadow duration-200"
-          : ""
-      }`}
+      className={`flex items-center justify-between border-2 rounded-2xl py-4 px-4 my-5 min-h-[60px] shadow-md 
+      ${isSelected ? "  border-blue-600 " : ""}`}
       style={{ backgroundColor: taskData.bg }}
       onClick={handleClick}
     >
       <div className="flex items-center">
-
         <span className="rounded-xl w-12 h-12 bg-white flex items-center justify-center mr-4">
-          {/* <Icon icon={taskData.icon} /> */}
-             <img src={taskData.icon} alt="action" className="w-6 h-6" />
+          <Icon icon={taskData.icon} />
         </span>
         <div>
           <div className="font-bold text-xl text-gray-900">{label}</div>
           {description && (
-            <div className="text-sm text-gray-500 mt-1">{description}</div>
+            <div className=" text-sm text-gray-900 mt-1">
+              {description.split("  ").map((part, index) => (
+                <span key={index}>
+                  {part.trim()}
+                  {index !== description.split("  ").length - 1 && <br />}
+                </span>
+              ))}
+            </div>
           )}
         </div>
       </div>
